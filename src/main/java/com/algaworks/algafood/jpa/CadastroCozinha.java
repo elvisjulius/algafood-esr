@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class CadastroCozinha {
     }
 
     @Transactional
-    public Cozinha adicionar(Cozinha cozinha){
+    public Cozinha salvar(Cozinha cozinha){
         return manager.merge(cozinha);
     }
 
