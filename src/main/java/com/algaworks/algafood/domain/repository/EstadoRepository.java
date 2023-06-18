@@ -5,7 +5,7 @@ import com.algaworks.algafood.domain.model.Estado;
 import java.util.List;
 
 public interface EstadoRepository {
-    List<Estado> todos();
+    List<Estado> listar();
     Estado porId(Long id);
     Estado adicionar(Estado estado);
 
