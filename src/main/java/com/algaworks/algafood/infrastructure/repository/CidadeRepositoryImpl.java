@@ -3,6 +3,7 @@ package com.algaworks.algafood.infrastructure.repository;
 import com.algaworks.algafood.domain.model.Cidade;
 import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.repository.CidadeRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -16,26 +17,31 @@ public class CidadeRepositoryImpl implements CidadeRepository {
     private EntityManager manager;
 
     @Override
-    public List<Cidade> todas() {
+    public List<Cidade> listar() {
         return manager.createQuery("from Cidade", Cidade.class)
                 .getResultList();
     }
 
     @Override
     @Transactional
-    public Cidade adicionar(Cidade cidade){
+    public Cidade salvar(Cidade cidade){
         return manager.merge(cidade);
     }
 
     @Override
-    public Cidade porId(Long id) {
+    public Cidade buscar(Long id) {
         return manager.find(Cidade.class, id);
     }
 
-    @Override
     @Transactional
-    public void remover(Cidade cidade){
-        cidade = porId(cidade.getId());
+    @Override
+    public void remover(Long id) {
+        Cidade cidade = buscar(id);
+
+        if (cidade == null) {
+            throw new EmptyResultDataAccessException(1);
+        }
+
         manager.remove(cidade);
     }
 }
