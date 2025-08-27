@@ -44,4 +44,24 @@ public List<Restaurante> restaurantesPorTaxaFrete(@RequestParam("taxaInicial") B
     public List<Restaurante> restaurantesPorTaxaFrete(String nome, Long cozinhaId){
         return restauranteRepository.findByNomeContainingAndCozinhaId(nome, cozinhaId);
     }
+
+    @GetMapping("/restaurantes/primeiro-por-nome")
+    public Optional<Restaurante> primeiroRestaurante(String nome){
+        return restauranteRepository.findFirstByNomeContaining(nome);
+    }
+
+    @GetMapping("/restaurantes/top2-por-nome")
+public List<Restaurante> top2Restaurantes(String nome){
+return restauranteRepository.findTop2ByNomeContaining(nome);
+}
+
+@GetMapping("/cozinhas/exists")
+public boolean cozinhaExists(String nome){
+return cozinhaRepository.existsByNome(nome);
+    }
+
+    @GetMapping("/restaurantes/count-por-cozinha")
+public int countRestaurantes(Long cozinhaId){
+return restauranteRepository.countByCozinhaId(cozinhaId);
+    }
 }
