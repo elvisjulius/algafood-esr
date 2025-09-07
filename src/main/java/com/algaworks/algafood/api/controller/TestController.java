@@ -40,6 +40,12 @@ public List<Restaurante> restaurantesPorTaxaFrete(@RequestParam("taxaInicial") B
         return restauranteRepository.findByTaxaFreteBetween(taxaInicial, taxaFinal);
     }
 
+    @GetMapping("/restaurantes/por-nome-e-frete")
+    public List<Restaurante> restaurantesPorNomeEFrete(@RequestParam("nome") String nome, @RequestParam("taxaInicial") BigDecimal taxaInicial,
+                                                       @RequestParam("taxaFinal") BigDecimal taxaFinal){
+        return restauranteRepository.find(nome, taxaInicial, taxaFinal);
+    }
+
     @GetMapping("/restaurantes/por-nome")
     public List<Restaurante> restaurantesPorTaxaFrete(String nome, Long cozinhaId){
         return restauranteRepository.consultarPorNome(nome, cozinhaId);
