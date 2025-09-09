@@ -41,8 +41,8 @@ public List<Restaurante> restaurantesPorTaxaFrete(@RequestParam("taxaInicial") B
     }
 
     @GetMapping("/restaurantes/por-nome-e-frete")
-    public List<Restaurante> restaurantesPorNomeEFrete(@RequestParam("nome") String nome, @RequestParam("taxaInicial") BigDecimal taxaInicial,
-                                                       @RequestParam("taxaFinal") BigDecimal taxaFinal){
+    public List<Restaurante> restaurantesPorNomeEFrete(String nome, BigDecimal taxaInicial,
+                                                       BigDecimal taxaFinal){
         return restauranteRepository.find(nome, taxaInicial, taxaFinal);
     }
 
